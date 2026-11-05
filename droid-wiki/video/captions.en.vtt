@@ -1,0 +1,833 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.662
+A card account can be viewed
+
+2
+00:00:01.662 --> 00:00:03.540
+at a terminal and updated later
+
+3
+00:00:03.540 --> 00:00:04.407
+by a batch job.
+
+4
+00:00:04.407 --> 00:00:06.557
+CardDemo puts both worlds in one
+
+5
+00:00:06.557 --> 00:00:07.433
+repository.
+
+6
+00:00:07.433 --> 00:00:09.925
+Its core is COBOL running under
+
+7
+00:00:09.925 --> 00:00:12.417
+CICS, with VSAM records and JCL
+
+8
+00:00:12.417 --> 00:00:14.046
+driven processing.
+
+9
+00:00:14.046 --> 00:00:16.589
+That combination makes the project useful
+
+10
+00:00:16.589 --> 00:00:18.989
+for studying mainframe behavior before
+
+11
+00:00:18.989 --> 00:00:19.766
+changing it.
+
+12
+00:00:19.766 --> 00:00:22.300
+This is demonstration software, not a
+
+13
+00:00:22.300 --> 00:00:24.360
+production banking platform.
+
+14
+00:00:24.360 --> 00:00:26.661
+The most useful starting question is
+
+15
+00:00:26.661 --> 00:00:28.889
+simple: which program owns the next
+
+16
+00:00:28.889 --> 00:00:30.745
+step, and which record does it
+
+17
+00:00:30.745 --> 00:00:31.264
+change?
+
+18
+00:00:31.264 --> 00:00:33.246
+First, look at the work users
+
+19
+00:00:33.246 --> 00:00:34.154
+can perform.
+
+20
+00:00:34.154 --> 00:00:36.261
+The regular menu leads to account
+
+21
+00:00:36.261 --> 00:00:38.969
+and card screens, transaction workflows,
+
+22
+00:00:38.969 --> 00:00:40.850
+and billing related actions.
+
+23
+00:00:40.850 --> 00:00:43.141
+A separate administrator menu manages
+
+24
+00:00:43.141 --> 00:00:45.710
+users and optional reference maintenance.
+
+25
+00:00:45.710 --> 00:00:48.166
+These are terminal workflows, not web
+
+26
+00:00:48.166 --> 00:00:48.933
+endpoints.
+
+27
+00:00:48.933 --> 00:00:50.974
+In the source tree, programs live
+
+28
+00:00:50.974 --> 00:00:53.524
+beside map definitions and shared record
+
+29
+00:00:53.524 --> 00:00:54.107
+layouts.
+
+30
+00:00:54.107 --> 00:00:56.947
+The base application contains twenty nine
+
+31
+00:00:56.947 --> 00:00:58.051
+COBOL programs.
+
+32
+00:00:58.051 --> 00:01:00.562
+The optional integration directories add
+
+33
+00:01:00.562 --> 00:01:02.934
+capabilities, but they are not required
+
+34
+00:01:02.934 --> 00:01:04.259
+for every core screen.
+
+35
+00:01:04.259 --> 00:01:07.050
+Next, follow signon into the menu.
+
+36
+00:01:07.050 --> 00:01:09.607
+The initial transaction enters the signon
+
+37
+00:01:09.607 --> 00:01:12.164
+program, which distinguishes first entry
+
+38
+00:01:12.164 --> 00:01:14.010
+from a returning interaction.
+
+39
+00:01:14.010 --> 00:01:16.039
+It reads the application user record
+
+40
+00:01:16.039 --> 00:01:17.675
+and routes according to role.
+
+41
+00:01:17.675 --> 00:01:19.440
+Sending a screen does not keep
+
+42
+00:01:19.440 --> 00:01:21.205
+one program waiting forever.
+
+43
+00:01:21.205 --> 00:01:23.306
+A CICS return arranges the next
+
+44
+00:01:23.306 --> 00:01:26.215
+transaction and carries context forward.
+
+45
+00:01:26.215 --> 00:01:28.787
+The shared communication area preserves
+
+46
+00:01:28.787 --> 00:01:31.286
+navigation and account context between
+
+47
+00:01:31.286 --> 00:01:31.727
+tasks.
+
+48
+00:01:31.727 --> 00:01:33.907
+This pseudo conversational pattern is
+
+49
+00:01:33.907 --> 00:01:36.352
+central to understanding where validation
+
+50
+00:01:36.352 --> 00:01:37.342
+and state belong.
+
+51
+00:01:37.342 --> 00:01:39.470
+A screen change crosses more than
+
+52
+00:01:39.470 --> 00:01:40.078
+one file.
+
+53
+00:01:40.078 --> 00:01:42.652
+The COBOL program supplies behavior.
+
+54
+00:01:42.652 --> 00:01:45.782
+The BMS map defines terminal positions,
+
+55
+00:01:45.782 --> 00:01:48.083
+attributes, and field sizes.
+
+56
+00:01:48.083 --> 00:01:50.309
+A symbolic map provides the fields
+
+57
+00:01:50.309 --> 00:01:51.921
+consumed by the program.
+
+58
+00:01:51.921 --> 00:01:54.387
+The account viewer map explicitly targets
+
+59
+00:01:54.387 --> 00:01:56.305
+a twenty four by eighty terminal.
+
+60
+00:01:56.305 --> 00:01:58.628
+Keep all three representations aligned
+
+61
+00:01:58.628 --> 00:02:00.677
+when adding input or changing field
+
+62
+00:02:00.677 --> 00:02:01.223
+lengths.
+
+63
+00:02:01.223 --> 00:02:02.733
+The view on screen here is
+
+64
+00:02:02.733 --> 00:02:04.817
+a source grounded schematic, not a
+
+65
+00:02:04.817 --> 00:02:06.758
+captured application session.
+
+66
+00:02:06.758 --> 00:02:08.552
+No live host was exercised for
+
+67
+00:02:08.552 --> 00:02:09.700
+this walkthrough.
+
+68
+00:02:09.700 --> 00:02:11.931
+The account copybook defines a three
+
+69
+00:02:11.931 --> 00:02:13.226
+hundred byte record.
+
+70
+00:02:13.226 --> 00:02:15.289
+Its account key is eleven digits.
+
+71
+00:02:15.289 --> 00:02:17.445
+Monetary fields use signed decimal
+
+72
+00:02:17.445 --> 00:02:19.673
+display definitions with an implied
+
+73
+00:02:19.673 --> 00:02:20.608
+decimal point.
+
+74
+00:02:20.608 --> 00:02:22.875
+These are byte level contracts, not
+
+75
+00:02:22.875 --> 00:02:25.293
+interchangeable strings or database
+
+76
+00:02:25.293 --> 00:02:25.898
+objects.
+
+77
+00:02:25.898 --> 00:02:27.783
+Online code refers to a CICS
+
+78
+00:02:27.783 --> 00:02:29.751
+file name, while batch uses a
+
+79
+00:02:29.751 --> 00:02:32.456
+different file binding for the related
+
+80
+00:02:32.456 --> 00:02:33.112
+dataset.
+
+81
+00:02:33.112 --> 00:02:35.172
+A safe change follows those names
+
+82
+00:02:35.172 --> 00:02:37.453
+across resource definitions and job
+
+83
+00:02:37.453 --> 00:02:38.041
+control.
+
+84
+00:02:38.041 --> 00:02:40.767
+Padding, encoding, signs, and record
+
+85
+00:02:40.767 --> 00:02:43.494
+lengths must survive the entire path.
+
+86
+00:02:43.494 --> 00:02:45.666
+Batch is the other execution world.
+
+87
+00:02:45.666 --> 00:02:48.715
+The posting job binds daily transactions,
+
+88
+00:02:48.715 --> 00:02:51.340
+account data, cross references, and
+
+89
+00:02:51.340 --> 00:02:54.219
+category balances to its COBOL program.
+
+90
+00:02:54.219 --> 00:02:56.549
+It also defines rejected output.
+
+91
+00:02:56.549 --> 00:02:58.613
+Interest calculation and statement
+
+92
+00:02:58.613 --> 00:03:01.142
+generation are separate responsibilities.
+
+93
+00:03:01.142 --> 00:03:03.543
+Because online and batch share files,
+
+94
+00:03:03.543 --> 00:03:06.020
+the close and reopen boundary matters.
+
+95
+00:03:06.020 --> 00:03:08.971
+This diagram describes relationships, not
+
+96
+00:03:08.971 --> 00:03:11.124
+a safe job submission sequence.
+
+97
+00:03:11.124 --> 00:03:13.545
+Initialization can replace data, and
+
+98
+00:03:13.545 --> 00:03:16.042
+replaying posting can change results.
+
+99
+00:03:16.042 --> 00:03:18.184
+Start with an isolated snapshot and
+
+100
+00:03:18.184 --> 00:03:20.327
+inspect each job before running it.
+
+101
+00:03:20.327 --> 00:03:22.678
+The authorization extension introduces a
+
+102
+00:03:22.678 --> 00:03:24.572
+different integration boundary.
+
+103
+00:03:24.572 --> 00:03:26.900
+An MQ request reaches a processor
+
+104
+00:03:26.900 --> 00:03:29.478
+that reads core VSAM reference data.
+
+105
+00:03:29.478 --> 00:03:31.858
+Pending authorization information is
+
+106
+00:03:31.858 --> 00:03:32.724
+stored in IMS.
+
+107
+00:03:32.724 --> 00:03:35.331
+Separate CICS review screens can mark
+
+108
+00:03:35.331 --> 00:03:37.450
+fraud through linked Db2 work.
+
+109
+00:03:37.450 --> 00:03:39.483
+The external point of sale client
+
+110
+00:03:39.483 --> 00:03:40.500
+is not included.
+
+111
+00:03:40.500 --> 00:03:42.829
+One important caveat is visible in
+
+112
+00:03:42.829 --> 00:03:45.079
+the source: the processor uses MQ
+
+113
+00:03:45.079 --> 00:03:47.167
+operations without syncpoint
+
+114
+00:03:47.167 --> 00:03:50.140
+participation and replies before updating
+
+115
+00:03:50.140 --> 00:03:50.461
+IMS.
+
+116
+00:03:50.461 --> 00:03:52.304
+Do not mistake this flow for
+
+117
+00:03:52.304 --> 00:03:55.109
+an atomic, exactly once payment service.
+
+118
+00:03:55.109 --> 00:03:57.734
+The transaction type extension uses Db2
+
+119
+00:03:57.734 --> 00:03:59.819
+for reference administration.
+
+120
+00:03:59.819 --> 00:04:01.268
+It does not move the whole
+
+121
+00:04:01.268 --> 00:04:03.200
+account system into a relational
+
+122
+00:04:03.200 --> 00:04:03.821
+database.
+
+123
+00:04:03.821 --> 00:04:05.934
+Online and batch maintenance update
+
+124
+00:04:05.934 --> 00:04:07.842
+transaction type descriptions.
+
+125
+00:04:07.842 --> 00:04:10.263
+An extraction job writes sequential
+
+126
+00:04:10.263 --> 00:04:12.762
+snapshots, and separate loading jobs
+
+127
+00:04:12.762 --> 00:04:15.340
+populate the VSAM reference files used
+
+128
+00:04:15.340 --> 00:04:16.277
+by reporting.
+
+129
+00:04:16.277 --> 00:04:18.328
+That separation is easy to miss.
+
+130
+00:04:18.328 --> 00:04:20.264
+A successful Db2 edit does not
+
+131
+00:04:20.264 --> 00:04:22.820
+mean every report immediately sees the
+
+132
+00:04:22.820 --> 00:04:23.362
+change.
+
+133
+00:04:23.362 --> 00:04:25.977
+Treat the schema, host declarations,
+
+134
+00:04:25.977 --> 00:04:28.920
+extracted lengths, and downstream load as
+
+135
+00:04:28.920 --> 00:04:30.800
+one coordinated contract.
+
+136
+00:04:30.800 --> 00:04:33.438
+Another optional directory contains date
+
+137
+00:04:33.438 --> 00:04:35.416
+and account responders over MQ.
+
+138
+00:04:35.416 --> 00:04:37.226
+These are not the authorization
+
+139
+00:04:37.226 --> 00:04:37.897
+processor.
+
+140
+00:04:37.897 --> 00:04:39.881
+The account request starts with a
+
+141
+00:04:39.881 --> 00:04:42.290
+four character operation followed by an
+
+142
+00:04:42.290 --> 00:04:43.849
+eleven digit account key.
+
+143
+00:04:43.849 --> 00:04:45.917
+Replies are padded to one thousand
+
+144
+00:04:45.917 --> 00:04:47.342
+bytes and sent to a fixed
+
+145
+00:04:47.342 --> 00:04:48.198
+destination.
+
+146
+00:04:48.198 --> 00:04:49.793
+The saved reply to queue is
+
+147
+00:04:49.793 --> 00:04:51.097
+not used for routing.
+
+148
+00:04:51.097 --> 00:04:53.886
+Some README examples describe a different
+
+149
+00:04:53.886 --> 00:04:55.977
+protocol, so use the programs as
+
+150
+00:04:55.977 --> 00:04:56.984
+the authority.
+
+151
+00:04:56.984 --> 00:04:59.577
+A consumer must preserve byte offsets,
+
+152
+00:04:59.577 --> 00:05:01.698
+encoding, and the signed amount
+
+153
+00:05:01.698 --> 00:05:02.877
+representation.
+
+154
+00:05:02.877 --> 00:05:05.121
+Running this repository requires a
+
+155
+00:05:05.121 --> 00:05:07.740
+configured host or compatible mainframe
+
+156
+00:05:07.740 --> 00:05:08.339
+runtime.
+
+157
+00:05:08.339 --> 00:05:10.544
+There is no universal laptop server
+
+158
+00:05:10.544 --> 00:05:11.133
+command.
+
+159
+00:05:11.133 --> 00:05:13.800
+Source transfer, compilation, resource
+
+160
+00:05:13.800 --> 00:05:16.392
+installation, and data initialization
+
+161
+00:05:16.392 --> 00:05:18.450
+each have environment specific
+
+162
+00:05:18.450 --> 00:05:19.365
+assumptions.
+
+163
+00:05:19.365 --> 00:05:21.594
+Begin with read only inquiry before
+
+164
+00:05:21.594 --> 00:05:22.709
+testing updates.
+
+165
+00:05:22.709 --> 00:05:25.749
+For batch, verify return codes, rejects,
+
+166
+00:05:25.749 --> 00:05:28.094
+and resulting records against a
+
+167
+00:05:28.094 --> 00:05:29.918
+reproducible snapshot.
+
+168
+00:05:29.918 --> 00:05:32.245
+No general automated assertion suite or
+
+169
+00:05:32.245 --> 00:05:34.298
+checked in continuous integration
+
+170
+00:05:34.298 --> 00:05:35.461
+workflow was found.
+
+171
+00:05:35.461 --> 00:05:37.516
+Sample data and utility jobs are
+
+172
+00:05:37.516 --> 00:05:39.495
+useful inputs, but they are not
+
+173
+00:05:39.495 --> 00:05:40.941
+proof of correctness.
+
+174
+00:05:40.941 --> 00:05:43.958
+Across the full repository, the inventory
+
+175
+00:05:43.958 --> 00:05:46.640
+includes forty two COBOL programs and
+
+176
+00:05:46.640 --> 00:05:49.573
+sixty one copybooks, including symbolic
+
+177
+00:05:49.573 --> 00:05:49.992
+maps.
+
+178
+00:05:49.992 --> 00:05:52.231
+Those counts show why shared contracts
+
+179
+00:05:52.231 --> 00:05:54.539
+deserve attention before translation.
+
+180
+00:05:54.539 --> 00:05:57.312
+The repository also contains a Factory
+
+181
+00:05:57.312 --> 00:06:00.085
+conversion skill, Java templates, and
+
+182
+00:06:00.085 --> 00:06:01.514
+analysis guidance.
+
+183
+00:06:01.514 --> 00:06:03.803
+Those Java files are examples, not
+
+184
+00:06:03.803 --> 00:06:06.093
+a built replacement application.
+
+185
+00:06:06.093 --> 00:06:08.558
+Packaged runtime archives are samples,
+
+186
+00:06:08.558 --> 00:06:10.733
+not infrastructure provisioning.
+
+187
+00:06:10.733 --> 00:06:13.252
+A useful modernization slice preserves
+
+188
+00:06:13.252 --> 00:06:15.474
+one observable journey, its record
+
+189
+00:06:15.474 --> 00:06:17.770
+semantics, and its failure behavior
+
+190
+00:06:17.770 --> 00:06:19.622
+before broadening the scope.
+
+191
+00:06:19.622 --> 00:06:21.705
+You can remember CardDemo as three
+
+192
+00:06:21.705 --> 00:06:22.782
+connected paths.
+
+193
+00:06:22.782 --> 00:06:24.652
+A screen leads through a program
+
+194
+00:06:24.652 --> 00:06:25.761
+to a shared record.
+
+195
+00:06:25.761 --> 00:06:27.623
+A batch job binds programs to
+
+196
+00:06:27.623 --> 00:06:30.028
+datasets and changes the same state.
+
+197
+00:06:30.028 --> 00:06:32.144
+An optional message path introduces
+
+198
+00:06:32.144 --> 00:06:34.055
+additional storage and recovery
+
+199
+00:06:34.055 --> 00:06:34.806
+boundaries.
+
+200
+00:06:34.806 --> 00:06:36.678
+For your first change, pick one
+
+201
+00:06:36.678 --> 00:06:38.838
+journey and trace every contract it
+
+202
+00:06:38.838 --> 00:06:39.414
+touches.
+
+203
+00:06:39.414 --> 00:06:42.342
+Keep demonstration data isolated, review
+
+204
+00:06:42.342 --> 00:06:44.945
+host security separately, and verify
+
+205
+00:06:44.945 --> 00:06:47.304
+behavior on the intended runtime.
+
+206
+00:06:47.304 --> 00:06:49.767
+Understanding those boundaries is the
+
+207
+00:06:49.767 --> 00:06:52.155
+foundation for a credible migration,
+
+208
+00:06:52.155 --> 00:06:54.543
+refactoring, or service extraction.
