@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-11-05T16:05:01.352328+00:00",
+  "commitHash": "8ca2f6033dce5339b2aed95d6bd072efe196f5d3",
+  "branch": "main",
+  "pageCount": 36,
+  "topLevelSections": [
+    "overview",
+    "by-the-numbers",
+    "lore",
+    "how-to-contribute",
+    "features",
+    "systems",
+    "deployment",
+    "security",
+    "how-to-monitor",
+    "background",
+    "reference",
+    "maintainers"
+  ],
+  "pageOrder": [
+    "overview/index.md",
+    "overview/architecture.md",
+    "overview/getting-started.md",
+    "overview/glossary.md",
+    "by-the-numbers.md",
+    "lore.md",
+    "how-to-contribute/index.md",
+    "how-to-contribute/development-workflow.md",
+    "how-to-contribute/testing.md",
+    "how-to-contribute/debugging.md",
+    "how-to-contribute/patterns-and-conventions.md",
+    "how-to-contribute/tooling.md",
+    "features/index.md",
+    "features/core/index.md",
+    "features/core/access-and-users.md",
+    "features/core/accounts-and-cards.md",
+    "features/core/transactions-and-billing.md",
+    "features/core/batch-processing.md",
+    "systems/index.md",
+    "systems/authorizations/index.md",
+    "systems/authorizations/mq-processing.md",
+    "systems/authorizations/online-and-fraud.md",
+    "systems/authorizations/batch-utilities.md",
+    "systems/transaction-types.md",
+    "systems/mq-inquiries.md",
+    "systems/utilities.md",
+    "deployment.md",
+    "security.md",
+    "how-to-monitor.md",
+    "background/index.md",
+    "background/modernization.md",
+    "reference/index.md",
+    "reference/configuration.md",
+    "reference/data-models.md",
+    "reference/dependencies.md",
+    "maintainers.md"
+  ],
+  "videoOverview": {
+    "status": "ready",
+    "sizeBytes": 12441974,
+    "contentType": "video/mp4",
+    "generatedAt": "2026-11-05T16:04:28.024Z",
+    "durationSeconds": 414.583333,
+    "captionTracks": [
+      {
+        "language": "en",
+        "label": "English",
+        "sizeBytes": 13611,
+        "contentType": "text/vtt"
+      }
+    ],
+    "warnings": [
+      "Local macOS Samantha TTS used; caption chunks are proportionally timed within individually synthesized sentences, not word-aligned.",
+      "HyperFrames lint: timeline_track_too_dense (12 scene clips on track 1); zero lint errors.",
+      "HyperFrames doctor warned about pinned v0.4.44 being older than v0.7.90 and low free memory (0.4 GB); rendering completed.",
+      "Isolated video npm dependency audit reported 13 vulnerabilities (1 moderate, 12 high); no application manifests or lockfiles were changed.",
+      "Renderer logged two nonblocking resource 404 warnings; visual QA verified the official logo, local fonts, and scene layouts.",
+      "No live application capture was available; visuals are source-grounded schematics, not evidence of a running host."
+    ]
+  }
+}
