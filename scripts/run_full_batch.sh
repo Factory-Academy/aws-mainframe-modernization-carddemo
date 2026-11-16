@@ -1,6 +1,6 @@
 #!/bin/bash
 # Check if tunnel is running on the system
-if [ $(ps f | grep -c "2121:") == 1 ]
+if [ "$(ps f | grep -c "2121:")" == 1 ]
 then 
   echo "FTP Tunnel to Ensono not running."
   exit 

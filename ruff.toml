@@ -1,0 +1,25 @@
+# Ruff lints and formats the Python tooling in this repository
+# (e.g. the COBOL-to-Java test data generator under .factory/skills).
+# Run locally with: ruff check . && ruff format --check .
+target-version = "py39"
+line-length = 100
+include = ["*.py", "*.pyi"]
+
+[lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes (unused imports, undefined names, ...)
+    "I",   # isort import ordering
+    "B",   # flake8-bugbear (likely bugs and design problems)
+    "UP",  # pyupgrade (modern syntax for the target version)
+    "SIM", # flake8-simplify
+    "S",   # flake8-bandit (security)
+]
+
+[lint.per-file-ignores]
+# Synthetic test data does not need a cryptographically secure RNG.
+".factory/skills/cobol-to-java-conversion/scripts/generate-test-data.py" = ["S311"]
+
+[format]
+quote-style = "double"

@@ -1,0 +1,4 @@
+# ShellCheck configuration for the scripts under scripts/ and .factory/skills.
+# CI runs: shellcheck --severity=warning <files>
+shell=bash
+external-sources=true
