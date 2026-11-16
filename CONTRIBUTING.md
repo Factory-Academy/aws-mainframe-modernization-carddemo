@@ -31,13 +31,24 @@ To send us a pull request, please:
 
 1. Fork the repository.
 2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
-3. Ensure local tests pass.
+3. Ensure local tests and linters pass (see [Linting](#linting)).
 4. Commit to your fork using clear commit messages.
 5. Send us a pull request, answering any default questions in the pull request interface.
 6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
 
 GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and
 [creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
+
+
+## Linting
+The `Lint` GitHub Actions workflow (`.github/workflows/lint.yml`) runs on every pull request:
+
+* **Python** is linted and format-checked with [Ruff](https://docs.astral.sh/ruff/) using `ruff.toml`:
+  `ruff check . && ruff format --check .`
+* **Shell scripts** are checked with [ShellCheck](https://www.shellcheck.net/) using `.shellcheckrc`:
+  `git ls-files -z '*.sh' | xargs -0 shellcheck --severity=warning`
+
+Both tools can be run without a local install via `uvx ruff ...` and `uvx --from shellcheck-py shellcheck ...`.
 
 
 ## Finding contributions to work on
